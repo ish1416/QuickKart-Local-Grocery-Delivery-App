@@ -303,43 +303,28 @@ export default function MainPage() {
         </View>
     );
 
+    const BottomNavBar = () => (
+        <View style={styles.bottomNavContainer}>
+            <TouchableOpacity style={styles.navItem}>
+                <Ionicons name="search-outline" size={24} color="#1A1A1A" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.navItem}>
+                <Ionicons name="person-outline" size={24} color="#1A1A1A" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.navItem}>
+                <Ionicons name="home" size={24} color="#1A1A1A" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.navItem}>
+                <Ionicons name="heart-outline" size={24} color="#1A1A1A" />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.navItem}>
+                <Ionicons name="menu-outline" size={24} color="#1A1A1A" />
+            </TouchableOpacity>
+        </View>
+    );
+
     const ListHeader = () => (
         <View>
-            <View style={styles.headerContainer}>
-                <Text style={styles.headerTitle}>Grocery Shopping</Text>
-                <View style={styles.searchBar}>
-                    <Ionicons
-                        name="search"
-                        size={20}
-                        color="#888"
-                        style={styles.searchIcon}
-                    />
-                    <TextInput
-                        style={styles.searchInput}
-                        placeholder="Search"
-                        value={searchText}
-                        onChangeText={setSearchText}
-                        placeholderTextColor="#888"
-                    />
-                </View>
-            </View>
-
-            <View style={styles.bannerContainer}>
-                <View style={styles.bannerContent}>
-                    <View style={styles.bannerTextContainer}>
-                        <Text style={styles.bannerTitle}>20% OFF</Text>
-                        <Text style={styles.bannerSubtitle}>on your first order</Text>
-                        <TouchableOpacity style={styles.bannerButton}>
-                            <Text style={styles.bannerButtonText}>Shop Now</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <Image
-                        source={{ uri: "https://placehold.co/200/F1C40F/FFFFFF?text=Veg" }}
-                        style={styles.bannerImage}
-                    />
-                </View>
-            </View>
-
             <Text style={styles.sectionTitle}>Categories</Text>
             <ScrollView
                 horizontal
@@ -361,7 +346,7 @@ export default function MainPage() {
                     </TouchableOpacity>
                 ))}
             </ScrollView>
-        </View>
+        </View >
     );
 
     return (
@@ -389,6 +374,7 @@ export default function MainPage() {
 
             {/* Content with Grid */}
             <ScrollView contentContainerStyle={styles.listContent} showsVerticalScrollIndicator={false}>
+                <ListHeader />
                 {filteredData.map((section) => (
                     <View key={section.title} style={styles.sectionContainer}>
                         <Text style={styles.sectionTitle}>{section.title}</Text>
@@ -398,6 +384,9 @@ export default function MainPage() {
                     </View>
                 ))}
             </ScrollView>
+
+            {/* Bottom Navigation */}
+            <BottomNavBar />
         </SafeAreaView>
     );
 };
@@ -452,7 +441,7 @@ const styles = StyleSheet.create({
     },
     listContent: {
         paddingHorizontal: 20,
-        paddingBottom: 40,
+        paddingBottom: 100, // Extra padding for bottom nav
     },
     sectionContainer: {
         marginBottom: 25,
@@ -462,6 +451,38 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         color: "#1A1A1A",
         marginBottom: 15,
+    },
+    categoriesScroll: {
+        marginBottom: 20,
+    },
+    categoryCard: {
+        width: 80,
+        height: 90,
+        marginRight: 12,
+        borderRadius: 16,
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 8,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 4,
+        elevation: 2,
+    },
+    selectedCategoryCard: {
+        borderWidth: 2,
+        borderColor: "#4CAF50",
+    },
+    categoryImage: {
+        width: 40,
+        height: 40,
+        marginBottom: 8,
+    },
+    categoryName: {
+        fontSize: 11,
+        fontWeight: "600",
+        color: "#333",
+        textAlign: "center",
     },
     gridContainer: {
         flexDirection: "row",
@@ -527,6 +548,28 @@ const styles = StyleSheet.create({
         backgroundColor: "#F0F9F4", // Light green background
         justifyContent: "center",
         alignItems: "center",
+    },
+    bottomNavContainer: {
+        position: "absolute",
+        bottom: 30,
+        left: 20,
+        right: 20,
+        backgroundColor: "#fff",
+        borderRadius: 30,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingVertical: 15,
+        paddingHorizontal: 25,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
+        elevation: 10,
+    },
+    navItem: {
+        alignItems: "center",
+        justifyContent: "center",
     },
 });
 
